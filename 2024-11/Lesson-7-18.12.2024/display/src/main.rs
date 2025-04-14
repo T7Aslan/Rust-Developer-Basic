@@ -28,14 +28,40 @@ struct Display {
 }
 
 fn create_display(max_width: u32, max_height: u32, default_colour: u8) -> Display {
-    // ваш код сюда
+    // ваш код сюда 
+    
     Display {
         matrix: Matrix::new(max_width, max_height, default_colour),
-    }
+}
 }
 
 fn process_commands(display: &mut Display, input: Vec<u64>) {
-    // ваш код сюда
+    // ваш код сюда 
+    
+    let mut i = 0;
+    let mut pos_x =0;
+    let mut pos_y  = 0;
+    let mut colour:u64 = 0;
+    
+    
+    while i < input.len(){
+        match input[i]
+        { 
+        1=>{  
+            pos_x = input[i+1];
+            pos_y = input[i+2];
+            i+=2;
+        }
+           2 =>{
+              colour = input[i+1]; 
+                i+=1;
+                display.matrix.set_colour(pos_x.into(), pos_y.into(), colour.try_into().unwrap());
+           },
+            _=> panic!("Команда не распознана")
+        };
+        i+=1;
+    }
+    
 }
 
 // код ниже трогать не нужно, можете просто посмотреть его
